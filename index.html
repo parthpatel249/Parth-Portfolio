@@ -13,7 +13,7 @@
 
     <!--=============== SWIPER CSS ===============-->
     <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-
+    
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="assets/css/styles.css">
 
@@ -21,6 +21,24 @@
 </head>
 
 <body onload="onload()">
+<header>
+        <h1>My Website<h1> <!-- Missing closing tag -->
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</li> <!-- <a> tag is not properly closed -->
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</li> <!-- <a> tag is not properly closed -->
+        </ul>
+    </nav>
+
+    <section>
+        <p>Welcome to my website. Here's some text.</p>
+        <p>This is another paragraph without a closing tag
+
+        <img src="image.jpg" alt="Sample Image" style="width:100px; height:auto"> <!-- Missing trailing slash -->
+    </section>
     <!--=============== HEADER ===============-->
     <header class="header" id="header">
         <nav class="nav container">
