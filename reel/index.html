@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>King of the Chase — Reel</title>
+  <style>
+    :root { --bg: #05070f; --panel: #0d1222; --line: #1d2742; --text: #e8ecf7; --muted: #8a93ad; --acc: #ffc933; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 14px/1.4 system-ui, sans-serif; }
+    body { display: flex; gap: 20px; padding: 16px; justify-content: center; align-items: flex-start; }
+    #stage { height: calc(100vh - 32px); aspect-ratio: 9 / 16; max-width: calc(100vw - 32px); position: relative; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.6); background: #000; }
+    #stage canvas { width: 100%; height: 100%; display: block; }
+    #drop { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(255,201,51,.18); border: 4px dashed var(--acc); font-size: 22px; font-weight: 700; }
+    #stage.dragging #drop { display: flex; }
+    aside { width: 320px; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+    h1 { margin: 0; font-size: 18px; letter-spacing: .02em; }
+    p { margin: 0; color: var(--muted); }
+    button, label.btn { appearance: none; border: 1px solid var(--line); background: #151c33; color: var(--text); padding: 10px 14px; border-radius: 10px; font-weight: 600; cursor: pointer; text-align: center; }
+    button:hover, label.btn:hover { border-color: var(--acc); }
+    button.primary { background: var(--acc); color: #1a1300; border-color: var(--acc); }
+    button:disabled { opacity: .5; cursor: default; }
+    .row { display: flex; gap: 8px; align-items: center; }
+    .row > * { flex: 1; }
+    input[type=range] { width: 100%; accent-color: var(--acc); }
+    input[type=number] { width: 90px; flex: 0 0 90px; background: #0a0f1d; color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; }
+    #time { font-variant-numeric: tabular-nums; color: var(--muted); }
+    #status { font-size: 13px; color: var(--muted); min-height: 38px; }
+    #lyric { font-weight: 700; color: var(--acc); min-height: 20px; }
+    @media (max-width: 760px) { body { flex-direction: column; align-items: center; } #stage { height: auto; width: 100%; } aside { width: 100%; } }
+    body.render aside { display: none; }
+    body.render { padding: 0; }
+  </style>
+</head>
+<body>
+  <div id="stage"><canvas id="c" width="1080" height="1920"></canvas><div id="drop">Drop your song here</div></div>
+  <aside>
+    <h1>King of the Chase · 1080×1920 reel</h1>
+    <p>Load the song to sync: beats and vocal onsets are detected automatically and every cut and word snaps to them.</p>
+    <label class="btn">Load audio…<input id="file" type="file" accept="audio/*" hidden /></label>
+    <div class="row"><button id="play" class="primary">Play</button><button id="restart">Restart</button></div>
+    <input id="scrub" type="range" min="0" max="60" step="0.001" value="0" />
+    <div class="row"><span id="time">0.00 / 60.00</span><span id="lyric"></span></div>
+    <div class="row"><span>Audio offset (s)</span><input id="offset" type="number" step="0.01" value="0" /></div>
+    <button id="export">Export video (real-time)</button>
+    <div id="status">No audio loaded — previewing on a 100 BPM guide grid.</div>
+  </aside>
+  <script src="src/fonts.js"></script>
+  <script src="src/config.js"></script>
+  <script src="src/audio-analysis.js"></script>
+  <script src="src/kit.js"></script>
+  <script src="src/world.js"></script>
+  <script src="src/scenes.js"></script>
+  <script src="src/engine.js"></script>
+  <script src="src/player.js"></script>
+</body>
+</html>
